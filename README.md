@@ -2,5 +2,4 @@
 
 ### Kompleksitas
 
-- **Waktu**: O(n), karena setiap karakter diproses sekali.
-- **Ruang**: O(n) dalam kasus terburuk (jika semua karakter adalah bracket pembuka).
+O(n), karena program hanya melakukan satu kali iterasi terhadap input string untuk mengecek keseimbangan bracket.

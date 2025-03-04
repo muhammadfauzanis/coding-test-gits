@@ -11,16 +11,16 @@ func lazyCatererSequence(n int) []int {
 }
 
 func RunSloaneOeis() {
-	var n int
+	var inputNumber int
 	fmt.Print("Masukkan angka: ")
-	fmt.Scan(&n)
+	fmt.Scan(&inputNumber)
 
-	if n <= 0 {
-		fmt.Println("Masukkan angka positif!")
+	if inputNumber <= 0 {
+		fmt.Println("Angka tidak boleh negatif dan 0, masukkan angka positif!")
 		return
 	}
 
-	sequence := lazyCatererSequence(n)
+	sequence := lazyCatererSequence(inputNumber)
 	for i, val := range sequence {
 		if i == len(sequence)-1 {
 			fmt.Printf("%d\n", val)

@@ -1,10 +1,12 @@
 package problems
 
 import (
+	"bufio"
 	"fmt"
+	"os"
+	"strings"
 )
 
-// isBalanced function to check if brackets are balanced
 func IsBalanced(s string) string {
 	stack := []rune{}
 	bracketMap := map[rune]rune{
@@ -20,7 +22,7 @@ func IsBalanced(s string) string {
 			if len(stack) == 0 || stack[len(stack)-1] != bracketMap[char] {
 				return "NO"
 			}
-			stack = stack[:len(stack)-1] // Pop from stack
+			stack = stack[:len(stack)-1]
 		}
 	}
 
@@ -31,13 +33,11 @@ func IsBalanced(s string) string {
 }
 
 func RunBalancedBracketTests() {
-	tests := []string{
-		"{[()]}",
-		"{[(])}",
-		"{(([])[[]])[]}",
-	}
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Masukkan string bracket: ")
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
 
-	for _, test := range tests {
-		fmt.Printf("Input: %s => Output: %s\n", test, IsBalanced(test))
-	}
+	result := IsBalanced(input)
+	fmt.Println("Output:", result)
 }

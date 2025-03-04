@@ -1,13 +1,18 @@
 package problems
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
 
 func DenseRanking(scores []int, gitsScores []int) []int {
-	rankMap := make(map[int]int) // Map to store the rank of each unique score
+	rankMap := make(map[int]int)
 	rank := 1
 	prevScore := -1
 
-	// Generate dense ranking for leaderboard scores
 	for _, score := range scores {
 		if score != prevScore {
 			rankMap[score] = rank
@@ -16,7 +21,6 @@ func DenseRanking(scores []int, gitsScores []int) []int {
 		prevScore = score
 	}
 
-	// Find rank for each GITS score
 	result := []int{}
 	for _, gitsScore := range gitsScores {
 		for i := 0; i < len(scores); i++ {
@@ -34,9 +38,34 @@ func DenseRanking(scores []int, gitsScores []int) []int {
 }
 
 func RunDenseRank() {
-	scores := []int{100, 100, 50, 40, 40, 20, 10}
-	gitsScores := []int{5, 25, 50, 120}
+	reader := bufio.NewReader(os.Stdin)
+
+	var player int
+	fmt.Print("Masukkan jumlah pemain: ")
+	fmt.Scanln(&player)
+
+	reader.ReadString('\n')
+
+	fmt.Print("Masukkan daftar skor: ")
+	scoreInput, _ := reader.ReadString('\n')
+	scoreStr := strings.Fields(scoreInput)
+	scores := make([]int, len(scoreStr))
+	for i, val := range scoreStr {
+		scores[i], _ = strconv.Atoi(val)
+	}
+
+	var totalGames int
+	fmt.Print("Masukkan jumlah permainan yang diikuti GITS: ")
+	fmt.Scanln(&totalGames)
+
+	fmt.Print("Masukkan skor yang didapat oleh GITS: ")
+	inputGames, _ := reader.ReadString('\n')
+	gitsStr := strings.Fields(inputGames)
+	gitsScores := make([]int, len(gitsStr))
+	for i, val := range gitsStr {
+		gitsScores[i], _ = strconv.Atoi(val)
+	}
 
 	result := DenseRanking(scores, gitsScores)
-	fmt.Println(result)
+	fmt.Println("Peringkat GITS:", result)
 }
